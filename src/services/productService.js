@@ -3,7 +3,7 @@ const productModel = require('../models/productModel');
 const listAllProducts = async () => {
   const products = await productModel.listAllProducts();
 
-  if (!products) return { type: 500, message: 'Not found' };
+  if (!products) return { type: 500, message: products };
 
   return { type: null, data: products };
 };
