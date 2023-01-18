@@ -16,7 +16,17 @@ const getProductsById = async (id) => {
   return { type: null, data: product };
 };
 
+const createProduct = async (name) => {
+  const id = await productModel.createProduct({ name });
+
+  if (!id) return { type: 404, message: 'Error' };
+  
+  const newProduct = { id, name };
+  return newProduct;
+};
+
 module.exports = {
   listAllProducts,
   getProductsById,
+  createProduct,
 };
