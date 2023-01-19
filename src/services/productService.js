@@ -1,4 +1,9 @@
+const Joi = require('joi');
 const productModel = require('../models/productModel');
+
+const createValidation = Joi.object({
+  name: Joi.string().min(5).max(45).required(),
+});
 
 const listAllProducts = async () => {
   const products = await productModel.listAllProducts();
@@ -17,10 +22,19 @@ const getProductsById = async (id) => {
 };
 
 const createProduct = async (name) => {
+  const { error } = createValidation.validate({ name });
+  if (error) {
+    if (!name) {
+      const err = { status: 400, message: error.message };
+      throw err; 
+    }
+    const err = { status: 422, message: error.message };
+    throw err;    
+  }     
   const id = await productModel.createProduct({ name });
   
   const newProduct = await productModel.getProductsById(id);
-  
+
   return newProduct;
 };
 

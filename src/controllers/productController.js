@@ -19,11 +19,13 @@ const getProductsById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const { name } = req.body;
-
-  const newProduct = await productService.createProduct(name);
-
-  return res.status(201).json(newProduct);
+  try {
+    const { name } = req.body;
+    const newProduct = await productService.createProduct(name);
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    return res.status(error.status).json({ message: error.message });
+  }
 };
 
 module.exports = {
