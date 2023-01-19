@@ -18,10 +18,9 @@ const getProductsById = async (id) => {
 
 const createProduct = async (name) => {
   const id = await productModel.createProduct({ name });
-
-  if (!id) return { type: 404, message: 'Error' };
   
-  const newProduct = { id, name };
+  const newProduct = await productModel.getProductsById(id);
+  
   return newProduct;
 };
 
