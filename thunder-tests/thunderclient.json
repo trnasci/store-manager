@@ -45,5 +45,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "a5baa80e-bf39-44f2-a54d-30913b929263",
+    "colId": "6e3e32d6-a4c2-4760-9ab7-df147144b441",
+    "containerId": "",
+    "name": "http://localhost:3000/sales",
+    "url": "http://localhost:3000/sales/10",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2023-01-20T18:34:44.338Z",
+    "modified": "2023-01-20T18:40:14.554Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
