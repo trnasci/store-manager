@@ -1,5 +1,7 @@
 const express = require('express');
 const productRouter = require('./routes/productRouter');
+const salesRouter = require('./routes/salesRouter');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -10,6 +12,7 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/products', productRouter);
+app.use('/sales', salesRouter);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
