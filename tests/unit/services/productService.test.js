@@ -22,5 +22,14 @@ describe('Testes na rota /products camada Service', function () {
     expect(response.body).to.deep.equal(products);
   });
 
+  it('Retorna o produto com o id da requisição', async function () {
+    sinon.stub(productModel, 'getProductsById').resolves(products[0]);
+
+    const response = await chai.request(app).get('/products/1');
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to.deep.equal(products[0]);
+  });
+
   afterEach(sinon.restore);
 });
