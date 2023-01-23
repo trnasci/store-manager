@@ -31,5 +31,16 @@ describe('Testes na rota /products camada Service', function () {
     expect(response.body).to.deep.equal(products[0]);
   });
 
+  it('Retorna um erro ao requisitar produto inesistente', async function () {
+    const res = { "message": "Product not found" };
+    sinon.stub(productModel, 'getProductsById').resolves([]);
+
+    const response = await chai.request(app).get('/products/8');
+
+    expect(response.status).to.equal(404);
+    expect(response.body).to.deep.equal(res);
+  });
+
+
   afterEach(sinon.restore);
 });
