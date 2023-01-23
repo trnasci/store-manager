@@ -38,8 +38,32 @@ const createProduct = async (name) => {
   return newProduct;
 };
 
+const changeProduct = async (id, name) => {  
+  const { error } = createValidation.validate({ name });
+  const product = await productModel.getProductsById(id);
+  if (error) {
+    if (!name) {
+      const err = { status: 400, message: error.message };
+      throw err;
+    }
+    const err = { status: 422, message: error.message };
+    throw err;
+  }
+  if (!product) {
+    const err = { status: 404, message: 'Product not found' };
+    throw err;
+  } 
+
+  await productModel.changeProduct(id, name);
+
+  const newProduct = await productModel.getProductsById(id);
+
+  return newProduct;
+};
+
 module.exports = {
   listAllProducts,
   getProductsById,
   createProduct,
+  changeProduct,
 };
